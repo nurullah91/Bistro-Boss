@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import SecHeading from "../../../Components/SecHeading";
-import MenuCard from "./MenuCard";
+import PopularMenuCard from "./PopularMenuCard";
 
 
-const Menu = () => {
+const PopularMenu = () => {
     const [menu, setMenu] = useState([]);
 
     useEffect( ()=>{
@@ -22,10 +22,10 @@ const Menu = () => {
             ></SecHeading>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
                 {
-                    menu.map(item=><MenuCard
+                    menu.map(item=><PopularMenuCard
                     item={item}
                     key={item._id}
-                    ></MenuCard>)
+                    ></PopularMenuCard>)
                 }
             </div>
 
@@ -33,4 +33,4 @@ const Menu = () => {
     );
 };
 
-export default Menu;
+export default PopularMenu;

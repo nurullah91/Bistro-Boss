@@ -1,16 +1,22 @@
+import { Helmet } from "react-helmet-async";
 import Featured from "../../Featured/Featured";
+import Testimonials from "../../Testimonials/Testimonials";
 import Banner from "../Banner/Banner";
-import Menu from "../Menu/Menu";
+import PopularMenu from "../PopularMenu/PopularMenu";
 import OrderOnline from "../OrderOnline/OrderOnline";
 
 
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>Bistro boss | Home</title>
+            </Helmet>
             <Banner></Banner>
             <OrderOnline></OrderOnline>
-            <Menu></Menu>
+            <PopularMenu></PopularMenu>
             <Featured></Featured>
+            <Testimonials></Testimonials>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 
-const MenuCard = ({item}) => {
+const PopularMenuCard = ({item}) => {
     const {image, name, recipe, price} = item;
     return (
         <div className="flex space-x-4">
@@ -14,4 +14,4 @@ const MenuCard = ({item}) => {
     );
 };
 
-export default MenuCard;
+export default PopularMenuCard;
