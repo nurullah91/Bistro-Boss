@@ -4,6 +4,7 @@ import {
 import Main from "../Layouts/Main";
 import Home from "../Pages/Home/Home/Home";
 import OurMenu from "../Pages/Home/OurMenu/OurMenu/OurMenu";
+import Order from "../Pages/Order/Order/Order";
 
 
 
@@ -19,8 +20,12 @@ import OurMenu from "../Pages/Home/OurMenu/OurMenu/OurMenu";
             element: <Home></Home>
         },
         {
-          path: '/menu',
+          path: 'menu',
           element: <OurMenu></OurMenu>
+        },
+        {
+          path: 'order',
+          element: <Order></Order>
         }
       ]
     },
