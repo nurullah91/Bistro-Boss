@@ -1,7 +1,7 @@
 
 import SecHeading from "../../../Components/SecHeading";
 import useMenu from "../../../hooks/useMenu";
-import PopularMenuCard from "./PopularMenuCard";
+import MenuItem from "../../../Components/MenuItem/MenuItem";
 
 
 const PopularMenu = () => {
@@ -16,10 +16,10 @@ const PopularMenu = () => {
             ></SecHeading>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
                 {
-                    popular.map(item=><PopularMenuCard
+                    popular.map(item=><MenuItem
                     item={item}
                     key={item._id}
-                    ></PopularMenuCard>)
+                    ></MenuItem>)
                 }
             </div>
 
