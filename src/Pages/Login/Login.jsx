@@ -1,15 +1,22 @@
 import { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from 'sweetalert2';
 
 const Login = () => {
 
     const [disabled, setDisabled] = useState(true);
-
+    const [showPass, setShowPass] = useState(false);
     const { signIn } = useContext(AuthContext);
+    
+    const location = useLocation()
+    const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || "/";
+
 
     const handleCaptcha = (e) => {
         const user_captcha_value = e.target.value;
@@ -41,6 +48,7 @@ const Login = () => {
                   )
                 const user = result.user;
                 console.log(user);
+            navigate(from)
             })
             .catch(err=>{
                 Swal.fire(
@@ -62,7 +70,7 @@ const Login = () => {
                         <h1 className="text-5xl font-bold">Login now!</h1>
 
                     </div>
-                    <div className="card  md:w-1/2 max-w-sm shadow-2xl bg-base-100">
+                    <div className="card  lg:w-1/2 max-w-sm shadow-2xl bg-base-100">
                         <div className="card-body">
                             <form onSubmit={handleLogin}>
                                 <div className="form-control">
@@ -71,11 +79,13 @@ const Login = () => {
                                     </label>
                                     <input type="email" name="email" required placeholder="email" className="input input-bordered" />
                                 </div>
-                                <div className="form-control">
+                                <div className="form-control relative">
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="password" name="password" required placeholder="password" className="input input-bordered" />
+                                    <input type={showPass?"text":"password"} name="password" required placeholder="password" className="input input-bordered" />
+                                    <span className='absolute bottom-12 right-3' onClick={()=>setShowPass(!showPass)}>{!showPass?<FaEye ></  FaEye>: <FaEyeSlash></FaEyeSlash>}</span>
+
                                     <label className="label">
                                         <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                     </label>
