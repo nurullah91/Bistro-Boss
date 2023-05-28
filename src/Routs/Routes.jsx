@@ -6,6 +6,7 @@ import Home from "../Pages/Home/Home/Home";
 import OurMenu from "../Pages/Home/OurMenu/OurMenu/OurMenu";
 import Order from "../Pages/Order/Order/Order";
 import Login from "../Pages/Login/Login";
+import SignUp from "../Pages/SignUp/SignUp";
 
 
 
@@ -31,6 +32,10 @@ import Login from "../Pages/Login/Login";
         {
           path: '/login',
           element:<Login></Login>
+        },
+        {
+          path:'/signup',
+          element: <SignUp></SignUp>
         }
       ]
     },
