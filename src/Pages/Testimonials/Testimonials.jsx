@@ -2,6 +2,7 @@ import SecHeading from "../../Components/SecHeading";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
+import { FaQuoteLeft } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
 import '@smastrom/react-rating/style.css'
@@ -15,7 +16,7 @@ const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch('reviews.json')
+        fetch(`http://localhost:5000/reviews`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [])
@@ -36,6 +37,7 @@ const Testimonials = () => {
                                     value={review.rating}
                                     readOnly
                                 />
+                                <FaQuoteLeft className="mt-5 text-5xl"></FaQuoteLeft>
                                 <p className="my-8">{review.details}</p>
                                 <h3 className="text-3xl text-orange-500">{review.name}</h3>
                             </div>
