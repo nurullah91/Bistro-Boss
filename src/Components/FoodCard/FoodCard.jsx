@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useCart from "../../hooks/useCart";
 
 
 const FoodCard = ({ item }) => {
@@ -10,20 +11,22 @@ const FoodCard = ({ item }) => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    const [, refetch] = useCart();
 
     const handleAddToCart = () => {
         if (user && user.email) {
             const cartItem = { menuItemId: _id, name, image, price, email: user.email }
-            fetch(`http://localhost:5000/cart`, {
+            fetch(`http://localhost:5000/carts`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify(cartItem)
             })
-                .then(res=>res.json())
-                .then(data=>{
-                    if (data.insertedId){
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        refetch();
                         Swal.fire('Order added to cart')
                     }
                 })
