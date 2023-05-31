@@ -5,13 +5,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from 'sweetalert2';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 
 const Login = () => {
 
     const [disabled, setDisabled] = useState(true);
     const [showPass, setShowPass] = useState(false);
     const { signIn } = useContext(AuthContext);
-    
+
     const location = useLocation()
     const navigate = useNavigate();
 
@@ -45,18 +46,18 @@ const Login = () => {
                     'Success',
                     'Login successful!',
                     'success'
-                  )
+                )
                 const user = result.user;
                 console.log(user);
-            navigate(from)
+                navigate(from)
             })
-            .catch(err=>{
+            .catch(err => {
                 Swal.fire(
                     'Oops!',
                     'something went wrong',
                     'error'
-                  )
-                  console.log(err);
+                )
+                console.log(err);
             })
     }
     return (
@@ -83,8 +84,8 @@ const Login = () => {
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type={showPass?"text":"password"} name="password" required placeholder="password" className="input input-bordered" />
-                                    <span className='absolute bottom-12 right-3' onClick={()=>setShowPass(!showPass)}>{!showPass?<FaEye ></  FaEye>: <FaEyeSlash></FaEyeSlash>}</span>
+                                    <input type={showPass ? "text" : "password"} name="password" required placeholder="password" className="input input-bordered" />
+                                    <span className='absolute bottom-12 right-3' onClick={() => setShowPass(!showPass)}>{!showPass ? <FaEye ></  FaEye> : <FaEyeSlash></FaEyeSlash>}</span>
 
                                     <label className="label">
                                         <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
@@ -105,6 +106,7 @@ const Login = () => {
                                     <input disabled={disabled} type="submit" className="btn btn-full" value="Login" />
                                 </div>
                             </form>
+                            <SocialLogin></SocialLogin>
                             <p><small>New this Website please <Link className="text-blue-500 font-bold hover:underline mx-1" to='/signup'>Sign Up</Link></small></p>
                         </div>
                     </div>

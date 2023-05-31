@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 
 const SignUp = () => {
@@ -17,20 +18,35 @@ const SignUp = () => {
     const onSubmit = data => {
         createUser(data.email, data.password)
             .then(() => {
-                Swal.fire(
-                    'Congratulation!',
-                    'You have successfully created an account',
-                    'success'
-                )
+
                 updateUser(data.name, data.photoUrl)
                     .then(() => {
+                        const saveUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users', {
+                            method: "POST",
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(result => {
+                                if (result.insertedId) {
+                                    Swal.fire(
+                                        'Congratulation!',
+                                        'You have successfully created an account',
+                                        'success'
+                                    )
+
+                                    reset();
+                                    navigate('/')
+                                }
+                            })
                         console.log("User Updated successfully");
                     })
                     .catch((error) => {
                         console.log(error);
                     })
-                reset();
-                navigate('/')
             })
             .catch(err => {
                 Swal.fire(
@@ -112,6 +128,7 @@ const SignUp = () => {
                                     <button className="btn btn-primary">sign up</button>
                                 </div>
                             </form>
+                            <SocialLogin></SocialLogin>
                             <p><small>Already have an account? please <Link className="text-blue-500 font-bold hover:underline mx-1" to='/login'>Login</Link></small></p>
                         </div>
                     </div>

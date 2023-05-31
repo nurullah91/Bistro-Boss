@@ -9,6 +9,8 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Secret from "../Pages/Secret/Secret";
 import PrivateRout from "./PrivateRout";
+import Dashboard from "../Layouts/Dashboard";
+import MyCart from "../Pages/MyCart/MyCart";
 
 
 
@@ -45,4 +47,14 @@ import PrivateRout from "./PrivateRout";
         }
       ]
     },
+    {
+      path:'dashboard',
+      element:<PrivateRout> <Dashboard></Dashboard></PrivateRout>,
+      children:[
+        {
+          path:'my-cart',
+          element: <MyCart></MyCart>
+        }
+      ]
+    }
   ]);
