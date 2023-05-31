@@ -1,5 +1,5 @@
 
-import { FaCalendar, FaCommentDots, FaEnvelope, FaHome, FaRegCalendarAlt, FaShoppingBag, FaShoppingCart, FaWallet } from 'react-icons/fa';
+import { FaBook, FaCalendar, FaCommentDots, FaEnvelope, FaHome, FaRegCalendarAlt, FaShoppingBag, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from 'react-icons/fa';
 import { GiHamburgerMenu, } from 'react-icons/gi';
 import { NavLink, Outlet } from 'react-router-dom';
 import useCart from '../hooks/useCart';
@@ -7,6 +7,7 @@ import useCart from '../hooks/useCart';
 const Dashboard = () => {
 
     const [cart] = useCart();
+    const isAdmin = true;
 
     return (
         <div className="drawer drawer-mobile">
@@ -26,15 +27,31 @@ const Dashboard = () => {
                 <ul className="menu p-4 w-80 text-base-content">
 
                     {/* sidebar content  */}
-                    <li><NavLink to='home'><FaHome></FaHome> User Home</NavLink></li>
-                    <li><NavLink to='/reservation'><FaCalendar></FaCalendar> Reservation</NavLink></li>
-                    <li><NavLink to='history'><FaWallet></FaWallet> Payment history</NavLink></li>
-                    <li><NavLink to='my-cart'>
-                        <FaShoppingCart></FaShoppingCart> My Cart
-                        <span className="badge bg-red-500 border-none">+{cart?.length || 0}</span>
-                    </NavLink></li>
-                    <li><NavLink to='add-review'><FaCommentDots></FaCommentDots> Add Review</NavLink></li>
-                    <li><NavLink to='bookings'><FaRegCalendarAlt></FaRegCalendarAlt> My Bookings</NavLink></li>
+                    {
+                        isAdmin ? <>
+
+                            <li><NavLink to='home'><FaHome></FaHome>Admin Home</NavLink></li>
+                            <li><NavLink to='add-items'><FaUtensils></FaUtensils> Add items</NavLink></li>
+                            <li><NavLink to='manage-items'><FaWallet></FaWallet> Manage items</NavLink></li>
+                            <li><NavLink to='manage-bookings'><FaBook></FaBook>Manage Booking</NavLink></li>
+                            <li><NavLink to='all-users'><FaUsers></FaUsers> All Users</NavLink></li>
+
+
+                        </> : <>
+
+                            <li><NavLink to='home'><FaHome></FaHome> User Home</NavLink></li>
+                            <li><NavLink to='/reservation'><FaCalendar></FaCalendar> Reservation</NavLink></li>
+                            <li><NavLink to='history'><FaWallet></FaWallet> Payment history</NavLink></li>
+                            <li><NavLink to='my-cart'>
+                                <FaShoppingCart></FaShoppingCart> My Cart
+                                <span className="badge bg-red-500 border-none">+{cart?.length || 0}</span>
+                            </NavLink></li>
+                            <li><NavLink to='add-review'><FaCommentDots></FaCommentDots> Add Review</NavLink></li>
+                            <li><NavLink to='bookings'><FaRegCalendarAlt></FaRegCalendarAlt> My Bookings</NavLink></li>
+                        </>
+                    }
+
+
 
                     <div className="divider"></div>
                     <li><NavLink to='/'><FaHome></FaHome>Home</NavLink></li>

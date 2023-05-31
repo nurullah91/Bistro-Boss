@@ -10,7 +10,8 @@ import SignUp from "../Pages/SignUp/SignUp";
 import Secret from "../Pages/Secret/Secret";
 import PrivateRout from "./PrivateRout";
 import Dashboard from "../Layouts/Dashboard";
-import MyCart from "../Pages/MyCart/MyCart";
+import MyCart from "../Pages/Dashboard/MyCart/MyCart";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 
 
 
@@ -54,6 +55,10 @@ import MyCart from "../Pages/MyCart/MyCart";
         {
           path:'my-cart',
           element: <MyCart></MyCart>
+        },
+        {
+          path:'all-users',
+          element: <AllUsers></AllUsers>
         }
       ]
     }

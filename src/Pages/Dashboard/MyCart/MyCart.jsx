@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import useCart from "../../hooks/useCart";
+import useCart from "../../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 
