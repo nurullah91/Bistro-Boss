@@ -1,14 +1,48 @@
 import { Helmet } from "react-helmet-async";
 import SecHeading from "../../../Components/SecHeading";
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AddItem = () => {
+    const { register, handleSubmit, reset } = useForm();
+    const imageUploadTOken = import.meta.env.VITE_image_upload_token;
+    const imageHostingUrl = `https://api.imgbb.com/1/upload?key=${imageUploadTOken}`
+    const [axiosSecure] = useAxiosSecure();
 
-    const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        console.log(data);
-    };
+        const formData = new FormData();
+        formData.append('image', data.image[0]);
 
+        fetch(imageHostingUrl, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imageResponse => {
+                if (imageResponse.success) {
+                    data.image = imageResponse.data.display_url;
+                    data.price = parseFloat(data.price);
+
+                    axiosSecure.post('/menu', data)
+                        .then(result => {
+                            if (result.data.insertedId) {
+                               reset();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Your work has been saved',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                            }
+                        })
+
+                }
+            })
+
+
+    };
 
     return (
         <div className="w-full">
@@ -18,7 +52,7 @@ const AddItem = () => {
             <SecHeading heading='Add an Item' subHeading='What&apos;s new?'></SecHeading>
 
 
-            <div>
+            <div className="lg:w-11/12 mx-auto bg-slate-100 shadow-md p-8">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full">
                         <label className="label">
@@ -31,13 +65,13 @@ const AddItem = () => {
                             <label className="label">
                                 <span className="label-text">Category*</span>
                             </label>
-                            <select {...register("category", { required: true, maxLength: 120 })} className="select select-bordered">
-                                <option disabled selected>Pick one</option>
-                                <option>Star Wars</option>
-                                <option>Harry Potter</option>
-                                <option>Lord of the Rings</option>
-                                <option>Planet of the Apes</option>
-                                <option>Star Trek</option>
+                            <select defaultValue='Pick One' {...register("category", { required: true, maxLength: 120 })} className="select select-bordered">
+                                <option disabled>Pick One</option>
+                                <option>salad</option>
+                                <option>pizza</option>
+                                <option>dessert</option>
+                                <option>drinks</option>
+                                <option>soup</option>
                             </select>
                         </div>
 
@@ -58,7 +92,7 @@ const AddItem = () => {
 
                     <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
 
-                    <input type="submit" value='Add Item' className="bg-gradient-to-r from-[#976923] to-[#B58130] text-white font-semibold px-5 py-3 block mt-4" />
+                    <input type="submit" value='Add Item' className="bg-gradient-to-r from-[#976923] to-[#B58130] text-white font-semibold px-5 py-3 rounded block mt-4" />
                 </form>
             </div>
         </div>
