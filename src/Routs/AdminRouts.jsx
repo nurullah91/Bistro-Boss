@@ -10,14 +10,15 @@ const AdminRouts = ({children}) => {
     const location = useLocation();
     
     if(loading || isAdminLoading){
-    return <progress className="progress w-56"></progress>;
+    return <div className="text-center flex flex-col items-center justify-between"><progress className="progress w-56"></progress></div>;
+    
     }
 
     if(user && isAdmin){
         return children;
     }
 
-  return  <Navigate to= '/login' state={{ from: location }} replace></Navigate>
+  return  <Navigate to= '/' state={{ from: location }} replace></Navigate>
 };
 
 export default AdminRouts;

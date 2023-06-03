@@ -7,8 +7,8 @@ const PrivateRout = ({children}) => {
     const location = useLocation();
     
     if(loading){
-    return <progress className="progress w-56"></progress>;
-    }
+  return <div className="text-center flex-col items-center justify-between"><progress className="progress w-56"></progress></div>;
+  }
 
     if(user){
         return children;

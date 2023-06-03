@@ -12,6 +12,8 @@ import PrivateRout from "./PrivateRout";
 import Dashboard from "../Layouts/Dashboard";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AdminRouts from "./AdminRouts";
+import AddItem from "../Pages/Dashboard/AddItem/AddItem";
 
 
 
@@ -59,6 +61,10 @@ import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
         {
           path:'all-users',
           element: <AllUsers></AllUsers>
+        },
+        {
+          path: 'add-item',
+          element:<AdminRouts><AddItem></AddItem></AdminRouts>
         }
       ]
     }
