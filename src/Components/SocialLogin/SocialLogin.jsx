@@ -39,7 +39,7 @@ const SocialLogin = () => {
         <div>
             <div className="divider">Sign in with</div>
             <div>
-                <button onClick={handleGoogleLogin} className="text-center py-2 px-4 rounded-md w-full bg-blue-50 hover:bg-blue-200 border-none text-3xl items-center flex"><FcGoogle className="mx-3"></FcGoogle> Google</button>
+                <button onClick={handleGoogleLogin} className="text-center py-2 px-4 rounded-md w-full bg-blue-50 hover:bg-blue-200 border-none  items-center font-semibold flex"><FcGoogle className="mx-3 text-3xl"></FcGoogle> Google</button>
             </div>
         </div>
     );
