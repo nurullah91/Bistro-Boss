@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -38,8 +38,8 @@ const SocialLogin = () => {
     return (
         <div>
             <div className="divider">Sign in with</div>
-            <div className="text-center">
-                <button onClick={handleGoogleLogin} className="btn btn-circle"><FaGoogle></FaGoogle></button>
+            <div>
+                <button onClick={handleGoogleLogin} className="text-center py-2 px-4 rounded-md w-full bg-blue-50 hover:bg-blue-200 border-none text-3xl items-center flex"><FcGoogle className="mx-3"></FcGoogle> Google</button>
             </div>
         </div>
     );
