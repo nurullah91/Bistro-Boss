@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 
 const AddItem = () => {
     const { register, handleSubmit, reset } = useForm();
-    const imageUploadTOken = import.meta.env.VITE_image_upload_token;
-    const imageHostingUrl = `https://api.imgbb.com/1/upload?key=${imageUploadTOken}`
+    const imageUploadToken = import.meta.env.VITE_image_upload_token;
+    const imageHostingUrl = `https://api.imgbb.com/1/upload?key=${imageUploadToken}`
     const [axiosSecure] = useAxiosSecure();
 
     const onSubmit = data => {
